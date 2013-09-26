@@ -27,6 +27,7 @@ describe User do
   it { should respond_to(:authenticate) }
   it {should respond_to(:admin)}
   it {should respond_to(:remember_token)}
+  it { should respond_to(:posts) }
   it { should be_valid }
   it {should_not be_admin}
 
@@ -110,30 +111,68 @@ describe User do
 	  	it { should_not be_valid }
 	end
 
-describe "return value of authenticate method" do
-  before { @user.save }
-  let(:found_user) { User.find_by_email(@user.email) }
+  describe "return value of authenticate method" do
+    before { @user.save }
+    let(:found_user) { User.find_by_email(@user.email) }
 
-  describe "with valid password" do
-    it { should == found_user.authenticate(@user.password) }
+    describe "with valid password" do
+      it { should == found_user.authenticate(@user.password) }
+    end
+
+    describe "with invalid password" do
+      let(:user_for_invalid_password) { found_user.authenticate("invalid") }
+
+      it { should_not == user_for_invalid_password }
+      specify { user_for_invalid_password.should be_false }
+    end
+    describe "with a password that's too short" do
+    	before { @user.password = @user.password_confirmation = "a" * 5 }
+    		it { should be_invalid }
+  	end
   end
 
-  describe "with invalid password" do
-    let(:user_for_invalid_password) { found_user.authenticate("invalid") }
-
-    it { should_not == user_for_invalid_password }
-    specify { user_for_invalid_password.should be_false }
+  describe "remember_token" do
+  	before {@user.save}
+  	its(:remember_token) {should_not be_blank}
   end
-  describe "with a password that's too short" do
-  	before { @user.password = @user.password_confirmation = "a" * 5 }
-  		it { should be_invalid }
-	end
-end
 
-describe "remember_token" do
-	before {@user.save}
-	its(:remember_token) {should_not be_blank}
-end
+  describe "profile page" do
+    let(:user) { FactoryGirl.create(:user) }
+    let!(:m1) { FactoryGirl.create(:post, user: user, topic: "One", content: "Foo") }
+    let!(:m2) { FactoryGirl.create(:post, user: user, topic: "Two", content: "Bar") }
+
+    before { visit user_path(user) }
+
+    it { should have_selector('h1',    text: user.name) }
+    it { should have_selector('title', text: user.name) }
+
+    describe "posts" do
+      it { should have_content(m1.content) }
+      it { should have_content(m2.content) }
+      it { should have_content(user.posts.count) }
+    end
+  end
+
+  describe "posts associations" do
+    before { @user.save }
+    let!(:older_post) do
+      FactoryGirl.create(:post, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_post) do
+      FactoryGirl.create(:post, user: @user, created_at: 1.hour.ago)
+    end
+    it "should have the right posts in the right order" do
+      @user.posts.should == [newer_post, older_post]
+    end
+    it "should destroy associated posts" do
+      posts = @user.posts.dup
+      @user.destroy
+      posts.should_not be_empty
+      posts.each do |post|
+        Post.find_by_id(post.id).should be_nil
+      end
+    end
+  end
 
 
 end
