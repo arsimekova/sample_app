@@ -213,6 +213,12 @@ input {
   float: left;
   margin-right: 10px;
 }
+.title {
+	textarea {
+    height: 50px;
+    margin-bottom: 5px;
+  }
+}
 aside {
   textarea {
     height: 100px;
