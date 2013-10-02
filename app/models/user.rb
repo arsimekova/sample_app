@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     Post.from_users_followed_by(self)
   end
 
+  def self.search(search)
+    self.find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+  end
+
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id)
   end
