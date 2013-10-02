@@ -10,7 +10,7 @@ FactoryGirl.define do
     end
     
     factory :post do
-    	topic "First"
+    	#topic "First"
     	content "Lorem ipsum"
     	user
   	end
