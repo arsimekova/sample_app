@@ -27,14 +27,15 @@ SampleApp::Application.configure do
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => 'www.sheltered-tor-3590.herokuapp.com'}
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
     :adress => "smtp.gmail.com",
     :port => 587,
-    :domain => "gmail.com",
+    :domain => "sheltered-tor-3590.herokuapp.com",
     user_name: ENV["GMAIL_USERNAME"],
     password: ENV["GMAIL_PASSWORD"],
     :authentiation => 'plain',
