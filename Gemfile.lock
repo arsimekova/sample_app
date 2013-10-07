@@ -105,6 +105,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mandrill-rails (1.0.0)
+      activesupport (>= 3.0.3)
     method_source (0.8.2)
     mime-types (1.25)
     mini_portile (0.5.1)
@@ -210,6 +212,7 @@ DEPENDENCIES
   growl (= 1.0.3)
   guard-spork (= 1.2.1)
   jquery-rails (= 2.0.2)
+  mandrill-rails
   newrelic_rpm
   pg (= 0.12.2)
   rails (= 3.2.13)

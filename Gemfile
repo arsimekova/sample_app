@@ -9,6 +9,7 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.7'
 #gem 'devise', "~> 3.1.1"
 gem 'authlogic'
+gem 'mandrill-rails'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
