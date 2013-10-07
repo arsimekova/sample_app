@@ -8,6 +8,7 @@ SampleApp::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :posts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :activations, only: [:create]
 
   root to: "static_pages#home"
 
@@ -21,6 +22,8 @@ SampleApp::Application.routes.draw do
   match '/signout', to: "sessions#destroy"
   match '/users', to: "users#index"
   match '/search', to: "users#search"
+
+  match  "/activate/:activation_code", to: "activations#create", as: :activate 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

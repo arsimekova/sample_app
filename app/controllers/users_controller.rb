@@ -46,10 +46,14 @@ end
 
   def create
   	@user = User.new(params[:user])
-  	if @user.save
-      sign_in @user
+  	#if @user.save
+    if @user.save_without_session_maintenance
+     # sign_in @user
+     # UserMailer.welcome_email(@user).deliver
+     @user.deliver_activation_instructions!
   		flash[:success] = "Welcome to Sample App!"
-  		redirect_to @user
+      flash[:success] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+  		redirect_to root_path
   	else
   		render 'new'
   	end

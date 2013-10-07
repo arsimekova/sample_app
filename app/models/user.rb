@@ -29,9 +29,23 @@ class User < ActiveRecord::Base
   				uniqueness: {case_sensitive: false}
   validates :password, presence: true, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+  acts_as_authentic #Other validations handled by authlogic
+
+def deliver_activation_instructions!
+  reset_perishable_token!
+  UserMailer.activation_instructions(self).deliver
+end
+
+
+  
+
+
+  def activate!
+    self.toggle!(:active)
+   # save
+  end
 
   def feed
-    # Это предварительное решение. См. полную реализацию в "Following users".
     Post.from_users_followed_by(self)
   end
 
