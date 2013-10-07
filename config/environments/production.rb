@@ -36,7 +36,7 @@ SampleApp::Application.configure do
     :port => 587,
     #:domain => "heroku.com",
     user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+    password: ENV["GMAIL_PASSWORD"],
     :authentiation => 'plain',
     :enable_starttls_auto => true
   }
