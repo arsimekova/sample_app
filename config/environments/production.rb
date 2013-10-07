@@ -33,12 +33,12 @@ SampleApp::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    :adress => "smtp.gmail.com",
-    :port => 587,
-    :domain => "sheltered-tor-3590.herokuapp.com",
+    :adress => "smtp.mandrillapp.com",
+    :port => '587',
+    :domain => "herokuapp.com",
     user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"],
-    :authentiation => 'plain',
+    password: ENV["MDRILL_PASS"],
+    :authentiation => :plain,
     :enable_starttls_auto => true
   }
   # Specifies the header that your server uses for sending files
