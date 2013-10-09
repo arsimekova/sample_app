@@ -1,0 +1,10 @@
+
+<%= form_for([ @post, @post.comments.build ]) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+	<div class="comment">
+		<%= f.text_area :comment, placeholder: "Your comment..." %>
+		<%= f.hidden_field(:posts_id, :value => posts_id) %>
+	</div>
+	<%= f.submit "Comment", class: "btn btn-large btn-primary" %>
+
+<% end %>

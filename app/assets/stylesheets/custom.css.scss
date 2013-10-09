@@ -251,6 +251,28 @@ aside {
   }
 }
 
+/* comments */
+
+.comment {
+ 	textarea {
+    height: 50px;
+    margin-bottom: 5px;
+  }
+   
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+.comment {
+	font-size: 1.6em;
+	display: block;
+}
+
+.timestamp {
+  color: $grayLight;
+}
+
 
 
 

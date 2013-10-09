@@ -13,4 +13,7 @@
 										data: { confirm: "Are you sure?" },
 										title: feed_item.topic %>
 	<% end %>
+
+	<span class="comment"><%= render 'shared/comment_form', :posts_id => feed_item.id %>
+	</span>
 </li>

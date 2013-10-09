@@ -3,10 +3,17 @@ SampleApp::Application.routes.draw do
   resources :users do
     member do
       get :following, :followers
+
     end
+
   end
+
+    resources :posts, only: [:create, :destroy] do
+      resources :comments
+    end
+  
   resources :sessions, only: [:new, :create, :destroy]
-  resources :posts, only: [:create, :destroy]
+  
   resources :relationships, only: [:create, :destroy]
   resources :activations, only: [:create]
 
@@ -22,8 +29,12 @@ SampleApp::Application.routes.draw do
   match '/signout', to: "sessions#destroy"
   match '/users', to: "users#index"
   match '/search', to: "users#search"
-
+ # match '/comments', to: "comments#create"
   match  "/activate/:activation_code", to: "activations#create", as: :activate 
+
+
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
