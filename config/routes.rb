@@ -7,10 +7,12 @@ SampleApp::Application.routes.draw do
     end
 
   end
+  
 
-    resources :posts, only: [:create, :destroy] do
-      resources :comments
-    end
+    resources :posts do
+     resources :comments
+  end
+
   
   resources :sessions, only: [:new, :create, :destroy]
   
@@ -31,6 +33,7 @@ SampleApp::Application.routes.draw do
   match '/search', to: "users#search"
  # match '/comments', to: "comments#create"
   match  "/activate/:activation_code", to: "activations#create", as: :activate 
+
 
 
 

@@ -18,6 +18,12 @@ class PostsController < ApplicationController
   	redirect_to root_url
   end
 
+  def show
+    @post = Post.find_by_id(params[:id])
+    @comment = @post.comments.build
+    @comments = @post.comments
+  end
+
   private
 
   def correct_user
