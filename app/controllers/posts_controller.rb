@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find_by_id(params[:id])
-    @comment = @post.comments.build
+    @comment = Comment.new
     @comments = @post.comments
   end
 

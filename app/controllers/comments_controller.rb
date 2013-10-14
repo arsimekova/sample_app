@@ -3,9 +3,11 @@ class CommentsController < ApplicationController
   	
 
   	def create
-      @post = Post.find(params[:post_id])
-      @comment = @post.comments.build(params[:comment])
-      @comment.user = current_user
+    @post = Post.find(params[:post_id])
+     # @comment = @post.comments.build(params[:comment])
+     @comment = Comment.new(params[:comment])
+     @comment.post = @post
+     @comment.user = current_user
 	  	
       if @comment.save
 	  		flash[:success] = "Comment added!"
