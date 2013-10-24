@@ -1,5 +1,6 @@
 <% if @comments.any? %>
-	<ol class="comments">
+	<li class="comments">
 		<%= render partial: 'shared/comment', collection: @comments %>
-	</ol>
+	</li>
+	<%= will_paginate @comments %>
 <% end %>

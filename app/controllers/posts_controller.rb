@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by_id(params[:id])
     @comment = Comment.new
-    @comments = @post.comments
+    @comments = @post.comments.paginate(page: params[:page])
   end
 
   private
