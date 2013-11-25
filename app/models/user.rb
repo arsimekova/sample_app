@@ -38,10 +38,6 @@ def deliver_activation_instructions!
   UserMailer.activation_instructions(self).deliver
 end
 
-
-  
-
-
   def activate!
     self.toggle!(:active)
    # save

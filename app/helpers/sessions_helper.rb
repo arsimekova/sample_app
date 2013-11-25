@@ -21,7 +21,15 @@ module SessionsHelper
 		!current_user.nil?
 	end
 
+	def activated?
+		current_user.active?
+	end
+
 	def signed_in_user
+		unless activated?
+			store_location
+			redirect_to root_url, notice: "Please, activate your account."
+		end
     	unless signed_in?
       		store_location
       		redirect_to signin_url, notice: "Please sign in."

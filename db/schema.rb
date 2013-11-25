@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131010111359) do
+ActiveRecord::Schema.define(:version => 20131125104754) do
 
   create_table "comments", :force => true do |t|
     t.text     "comment"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(:version => 20131010111359) do
     t.boolean  "admin",             :default => false
     t.boolean  "active",            :default => false
     t.string   "perishable_token"
-    t.string   "persistent_token"
     t.string   "persistence_token"
   end
 
